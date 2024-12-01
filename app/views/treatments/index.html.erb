@@ -1,0 +1,54 @@
+<div data-page-name="<%= page_name %>">
+  <div class="treatments-index">
+	<h2>Traitements de <%= @pet.name %></h2>
+  
+	<% if @treatments.any? %>
+	  <table>
+		<thead>
+		  <tr>
+			<th>Nom</th>
+			<th>Type</th>
+			<th>Début</th>
+			<th>Fin</th>
+			<th>Dosage</th>
+			<th>Fréquence</th>
+			<th>Date de renouvellement</th>
+			<th>Notes</th>
+			<th>Actions</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <% @treatments.each do |treatment| %>
+			<tr>
+			  <td><%= treatment.name %></td>
+			  <td><%= treatment.treatment_type %></td>
+			  <td><%= treatment.start_date.strftime("%d/%m/%Y") %></td>
+			  <td><%= treatment.end_date&.strftime("%d/%m/%Y") %></td>
+			  <td><%= treatment.dosage %></td>
+			  <td><%= treatment.frequency %></td>
+			  <td><%= treatment.renew_date&.strftime("%d/%m/%Y") %></td>
+			  <td><%= treatment.notes %></td>
+			  <td class="actions">
+				<%= link_to "Modifier", edit_pet_treatment_path(@pet, treatment) %>
+				<%= link_to "Supprimer", 
+					pet_treatment_path(@pet, treatment),
+					data: {
+					  turbo_method: :delete,
+					  turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce traitement ?"
+					} %>
+			  </td>
+			</tr>
+		  <% end %>
+		</tbody>
+	  </table>
+	<% else %>
+	  <p>Aucun traitement enregistré pour le moment.</p>
+	<% end %>
+  
+	<div class="actions">
+	  <%= link_to "Ajouter un traitement", new_pet_treatment_path(@pet) %>
+	</div>
+	<hr>
+	<%= link_to "Retour", pet_path(@pet) %>
+  </div>
+</div>

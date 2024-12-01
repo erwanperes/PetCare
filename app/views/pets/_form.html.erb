@@ -1,0 +1,57 @@
+	<div class="pet-form">
+  <h1 class="display-4 display-md-5 fw-bold mb-4">
+	  <%= @pet.new_record? ? "Ajouter un nouvel animal" : "Mettre à jour les informations" %>
+	</h1>
+
+  <%= form_with(model: @pet, local: true) do |f| %>
+	<% if @pet.errors.any? %>
+	  <div class="error-messages">
+		<h3><%= pluralize(@pet.errors.count, "erreur") %> :</h3>
+		<ul>
+		  <% @pet.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		  <% end %>
+		</ul>
+	  </div>
+	<% end %>
+
+	<div class="form-group">
+	  <%= f.label :name, "Nom" %>
+	  <%= f.text_field :name %>
+	</div>
+
+	<div class="form-group">
+	  <%= f.label :specie, "Espèce" %>
+	  <%= f.select :specie, 
+		Pet::SPECIES,
+		{ prompt: "Sélectionnez une espèce" } %>
+	</div>
+
+	<div class="form-group">
+	  <%= f.label :breed, "Race" %>
+	  <%= f.text_field :breed %>
+	</div>
+
+	<div class="form-group">
+	  <%= f.label :birth_day, "Date de naissance" %>
+	  <%= f.date_field :birth_day %>
+	</div>
+
+	<div class="form-group">
+	  <%= f.label :gender, "Genre" %>
+	  <%= f.select :gender, 
+		  Pet::GENDERS,
+		  { prompt: "Sélectionnez un genre" } %>
+	</div>
+
+	<div class="form-actions">
+	  <% if @pet.new_record? %>
+		<%= f.submit "Ajouter mon animal" %>
+	  <% else %>
+		<%= f.submit "Modifier mon animal" %>
+	  <% end %>
+	</div>
+  <% end %>
+</div>
+<hr>
+<%= link_to 'Annuler', @pet.new_record? ? dashboard_path : pet_path(@pet)%>

@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pet: one
+  treatment_type: 1
+  start_date: 2024-11-30
+  end_date: 2024-11-30
+  dosage: MyString
+  frequency: MyString
+  notes: MyText
+  renew_date: 2024-11-30
+  name: MyString
+
+two:
+  pet: two
+  treatment_type: 1
+  start_date: 2024-11-30
+  end_date: 2024-11-30
+  dosage: MyString
+  frequency: MyString
+  notes: MyText
+  renew_date: 2024-11-30
+  name: MyString

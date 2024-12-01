@@ -1,0 +1,27 @@
+<div  data-page-name="<%= page_name if defined?(page_name) %>">
+  <% if @pet %>
+	<div class="pet-details">
+	  <h2><%= @pet.name %></h2>
+	  <p>Espèce : <%= @pet.specie %></p>
+	  <p>Race : <%= @pet.breed %></p>
+	  <p>Date de naissance : <%= @pet.birth_day %></p>
+	  <p>Genre : <%= @pet.gender %></p>
+	  <p>Ajouté le : <%= @pet.created_at.strftime("%d/%m/%Y") %></p>
+	  <div>
+	  	<%= link_to "Voir les mesures", pet_measurements_path(@pet) %>
+		<%= link_to "Voir les traitements", pet_treatments_path(@pet) %>
+	  </div>
+
+	  <div>
+		<%= link_to "Modifier", edit_pet_path(@pet) %>
+		<%= link_to "Retour au dashboard", dashboard_path %>
+		<%= link_to "Supprimer", pet_path(@pet), 
+			data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer #{@pet.name} ?" } %>
+	  </div>
+	</div>
+  <% else %>
+	<p>Animal non trouvé</p>
+	<%= link_to "Retour au dashboard", dashboard_path %>
+  <% end %>
+</div>
+

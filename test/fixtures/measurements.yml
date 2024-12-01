@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  measurement_type: 1
+  value: 1.5
+  date: 2024-11-30
+  pet: one
+  notes: MyText
+
+two:
+  measurement_type: 1
+  value: 1.5
+  date: 2024-11-30
+  pet: two
+  notes: MyText

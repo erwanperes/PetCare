@@ -1,9 +1,24 @@
 class Pet < ApplicationRecord
+	SPECIES  = [
+		"Dog",
+		"Cat",
+		"Rabbit",
+		"Other"
+	  ]
+	
+	  GENDERS = [
+		"Male",
+		"Female"
+	  ]
+	
 	belongs_to :user
+	has_many :treatments 
+	has_many :measurements
 	
 	validates :name, presence: true
-	validates :specie, presence: true
-	validates :gender, inclusion: { in: ['male', 'female', 'other'] }
+	validates :specie, presence: true, inclusion: { in: SPECIES }
+	validates :gender, presence: true, inclusion: { in: GENDERS }
+	validates :birth_day, presence: true
 	
 	validate :birth_day_cannot_be_in_the_future
 	

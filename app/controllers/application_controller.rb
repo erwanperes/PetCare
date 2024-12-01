@@ -32,4 +32,13 @@ class ApplicationController < ActionController::Base
     # 4. Redirection avec des paramètres personnalisés
     # params[:redirect_to] || root_path
   end
+  
+  helper_method :page_name
+  
+  private
+  
+  def page_name
+    controller_name = controller_path.gsub('/', '_')
+    "#{controller_name}_#{action_name}"
+  end
 end

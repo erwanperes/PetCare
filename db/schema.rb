@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_29_204438) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_30_215456) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "measurements", force: :cascade do |t|
+    t.integer "measurement_type"
+    t.float "value"
+    t.date "date"
+    t.bigint "pet_id", null: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_measurements_on_pet_id"
+  end
 
   create_table "pets", force: :cascade do |t|
     t.string "name"
@@ -24,6 +35,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_29_204438) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pets_on_user_id"
+  end
+
+  create_table "treatments", force: :cascade do |t|
+    t.bigint "pet_id", null: false
+    t.integer "treatment_type"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "dosage"
+    t.string "frequency"
+    t.text "notes"
+    t.date "renew_date"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_treatments_on_pet_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,5 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_29_204438) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "measurements", "pets"
   add_foreign_key "pets", "users"
+  add_foreign_key "treatments", "pets"
 end

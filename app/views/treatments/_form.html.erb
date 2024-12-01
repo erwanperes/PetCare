@@ -1,0 +1,68 @@
+<div class="treatment-form">
+ <h2><%= @treatment.new_record? ? "Ajouter un nouveau traitement" : "Modifier le traitement" %> pour <%= @pet.name %></h2>
+
+ <%= form_with(model: [@pet, @treatment], local: true) do |f| %>
+   <% if @treatment.errors.any? %>
+	 <div class="error-messages">
+	   <h3><%= pluralize(@treatment.errors.count, "erreur") %> :</h3>
+	   <ul>
+		 <% @treatment.errors.full_messages.each do |msg| %>
+		   <li><%= msg %></li>
+		 <% end %>
+	   </ul>
+	 </div>
+   <% end %>
+
+   <div class="form-group">
+	 <%= f.label :name, "Nom du traitement" %>
+	 <%= f.text_field :name %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :treatment_type, "Type de traitement" %>
+	 <%= f.select :treatment_type,
+		 Treatment.treatment_types.keys,
+		 { prompt: "Sélectionnez un type de traitement" } %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :start_date, "Date de début" %>
+	 <%= f.date_field :start_date %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :end_date, "Date de fin" %>
+	 <%= f.date_field :end_date %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :dosage, "Dosage" %>
+	 <%= f.text_field :dosage %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :frequency, "Fréquence" %>
+	 <%= f.text_field :frequency %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :renew_date, "Date de renouvellement" %>
+	 <%= f.date_field :renew_date %>
+   </div>
+
+   <div class="form-group">
+	 <%= f.label :notes, "Notes" %>
+	 <%= f.text_area :notes, rows: 3 %>
+   </div>
+
+   <div class="form-actions">
+	 <% if @treatment.new_record? %>
+	   <%= f.submit "Ajouter le traitement" %>
+	 <% else %>
+	   <%= f.submit "Modifier le traitement" %>
+	 <% end %>
+   </div>
+ <% end %>
+</div>
+<hr>
+<%= link_to "Retour", pet_treatments_path(@pet) %>
