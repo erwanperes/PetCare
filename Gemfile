@@ -69,3 +69,5 @@ end
 gem 'ostruct'
 gem "devise"
 gem 'faker'
+gem 'inline_svg'
+gem 'chart-js-rails'

@@ -12,8 +12,8 @@ class Pet < ApplicationRecord
 	  ]
 	
 	belongs_to :user
-	has_many :treatments 
-	has_many :measurements
+	has_many :treatments, dependent: :destroy
+	  has_many :measurements, dependent: :destroy
 	
 	validates :name, presence: true
 	validates :specie, presence: true, inclusion: { in: SPECIES }
