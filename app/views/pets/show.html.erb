@@ -1,6 +1,18 @@
-<div  data-page-name="<%= page_name if defined?(page_name) %>">
+<div  data-page-name="<%= page_name if defined?(page_name) %>"
   <% if @pet %>
-	<div class="pet-details">
+  <div>
+	<% if @pet.photo.attached? %>
+		<div class="current-photo">
+		  <%= cl_image_tag @pet.photo.key, 
+			  transformation: [
+				{ width: 140, height: 140, crop: :fill },
+				{ radius: "max" }
+			  ] 
+		  %>
+		</div>
+	  <% end %>  
+  </div>
+  <div class="pet-details">
 	  <h2><%= @pet.name %></h2>
 	  <p>Espèce : <%= @pet.specie %></p>
 	  <p>Race : <%= @pet.breed %></p>

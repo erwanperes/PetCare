@@ -72,3 +72,4 @@ gem "devise"
 gem 'faker'
 gem 'inline_svg'
 gem 'chart-js-rails'
+gem "cloudinary"

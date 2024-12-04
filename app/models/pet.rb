@@ -11,6 +11,8 @@ class Pet < ApplicationRecord
 		"Female"
 	  ]
 	
+	has_one_attached :photo
+	
 	belongs_to :user
 	has_many :treatments, dependent: :destroy
 	has_many :measurements, dependent: :destroy
@@ -27,6 +29,12 @@ class Pet < ApplicationRecord
 	def birth_day_cannot_be_in_the_future
 		if birth_day.present? && birth_day > Date.today
 		  errors.add(:birth_day, "can't be in the future")
+		end
+	end
+	
+	def photo_key
+		if photo.attached?
+		  photo.key
 		end
 	end
 end
