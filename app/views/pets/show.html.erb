@@ -8,8 +8,8 @@
 	  <p>Genre : <%= @pet.gender %></p>
 	  <p>Ajouté le : <%= @pet.created_at.strftime("%d/%m/%Y") %></p>
 	  <div>
-	  	<%= link_to "Voir les mesures", pet_measurements_path(@pet) %>
-		<%= link_to "Voir les traitements", pet_treatments_path(@pet) %>
+	  	<%= link_to "Mesures", pet_measurements_path(@pet) %>
+		<%= link_to "Traitements", pet_treatments_path(@pet) %>
 	  </div>
 
 	  <div>
